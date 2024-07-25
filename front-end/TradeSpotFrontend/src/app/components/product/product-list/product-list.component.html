@@ -1,0 +1,11 @@
+<div style="text-align: center;">
+    <h2><strong>Buy & Sell Used Other Household Items in India</strong></h2>
+    <br>
+</div>
+<div class="div1">
+    <div *ngFor="let prod of products" >
+        <product [product] = "prod" *ngIf= "searchText === '' || prod.title.toLowerCase().includes(searchText.toLowerCase())"
+        ></product>
+    </div>   
+</div>
+

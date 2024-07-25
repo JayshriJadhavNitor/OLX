@@ -1,0 +1,18 @@
+
+<div style="text-align: center;">
+  <br>
+    <h2><strong>Browse Categories</strong></h2>
+    <br>
+</div>
+<div class="home-container">
+  <section class="categories">
+    <div class="category-list">
+      <div *ngFor="let category of categories" class="category-card">
+        <img src="/assets/{{category.categoryImgPath}}" alt="{{ category.name }}" (click)="loadProductsByCategory(category.name)" />
+        <h3>{{ category.name }}</h3>
+      </div>
+    </div>
+  </section>
+
+
+</div>

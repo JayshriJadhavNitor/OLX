@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light justify-content-between">
+  <a class="navbar-brand" href="/"><img src="../../../assets/logo.png" alt="OLX logo"></a>
+  <div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+      <div class="search">
+        <input class="search_input" type="text" name="" (input)="updateSearch($event)" placeholder="Search here...">
+        <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active"><strong>Sign in</strong></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
