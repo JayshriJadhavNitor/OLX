@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2e6355ee-8442-4238-bbf2-766db34f3469" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/SellItemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/DTO/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/DTO/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/controllers/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/controllers/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/controllers/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/customException/CustomException.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/customException/CustomException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/entities/Roles.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/entities/Roles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/Imageservices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/java/com/TradeSpot/services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradeSpotBackend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TradeSpotBackend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/aboutus/aboutus.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/aboutus/aboutus.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/aboutus/aboutus.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/admin-dashboard/admin-dashboard.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/admin-dashboard/admin-dashboard.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/admin-dashboard/admin-dashboard.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/categories/categories.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/categories/categories.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/categories/categories.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/contact/contact.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/contact/contact.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/contact/contact.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/faq/faq.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/faq/faq.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/faq/faq.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/features/features.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/features/features.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/features/features.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/footer/footer.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/footer/footer.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/footer/footer.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/forgot-password/forgot-password.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/forgot-password/forgot-password.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/forgot-password/forgot-password.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/login/login.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/login/login.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/login/login.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/navbar/navbar.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/navbar/navbar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/navbar/navbar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/product-details/product-details.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/product-details/product-details.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/product-details/product-details.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/product-list/product-list.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/product-list/product-list.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/product-list/product-list.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/user/user.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/user/user.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/components/user/user.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/models/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/models/product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/register/register.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/register/register.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/register/register.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/services/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/app/services/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/assets/clothing.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/assets/electronics.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/assets/electronics.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/assets/logo1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/TradeSpotFrontend/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2jjV0576WsOK5Ca8lwkxxgUmd6v" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.TradeSpotBackendApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/changing-ui",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2e6355ee-8442-4238-bbf2-766db34f3469" name="Changes" comment="" />
+      <created>1721900247278</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721900247278</updated>
+    </task>
+    <servers />
+  </component>
+</project>

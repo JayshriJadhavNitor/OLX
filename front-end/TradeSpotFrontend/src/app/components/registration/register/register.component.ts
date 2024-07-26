@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { register } from 'src/app/models/register';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private service:AuthService) {
+  constructor(private service:AuthService, private router: Router) {
     
   }
   
@@ -18,7 +19,7 @@ export class RegisterComponent {
 
     this.service.register(data).subscribe((result) => {
       console.log(result);
-      
+      this.router.navigateByUrl("/login");
     })
     
   }
