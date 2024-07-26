@@ -12,9 +12,11 @@ import com.TradeSpot.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.ClientInfoStatus;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -124,5 +126,27 @@ public class ProductService {
 
         List<Product> list = productRepository.getProductByCategoryName(categoryName);
         return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).toList();
+    }
+
+    public List<ProductResponseDTO> getBuyitems(long id){
+        List<Product> products= broughtItemsServices.productList(id);
+
+        return products.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).toList();
+
+    }
+
+
+    public List<ProductResponseDTO> getSellitems(long id) {
+
+        List<Product> list = sellItemsServices.findSellingList(id);
+        return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+    }
+
+
+    public List<ProductResponseDTO> findActiveProducts() {
+
+        List<Product> list = productRepository.findAll();
+        return  list.stream().filter(product -> product.isActive())
+                .map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
     }
 }

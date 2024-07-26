@@ -23,6 +23,6 @@ public class BroughtItemService {
 
     public List<Product> productList(long id){
 
-        return broughtItemsRepo.getProductByBuyerId(id);
+        return broughtItemsRepo.findProductsByBuyerId(id);
     }
 }

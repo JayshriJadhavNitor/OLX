@@ -30,12 +30,9 @@ public class SellItemService {
 
     }
 
-    public List<ProductResponseDTO> productList(long userId){
-        List<Product> products = sellrepo.getProductBySellerId(userId);
-        return products.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).toList();
 
+    public List<Product> findSellingList(long id) {
 
+        return sellrepo.findSellProduct(id);
     }
-
-
 }

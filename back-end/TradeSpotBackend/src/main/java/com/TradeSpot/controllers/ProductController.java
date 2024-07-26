@@ -136,5 +136,45 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/getbuyproduct/{id}")
+    public ResponseEntity<?> getBroughtitmes(@PathVariable long id){
+         List<ProductResponseDTO> list = productService.getBuyitems(id);
+
+        if(list!=null){
+            return ResponseEntity.ok().body(list);
+        }
+        else{
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
+    @GetMapping("/getsellproduct/{id}")
+    public ResponseEntity<?> getSellItmes(@PathVariable long id){
+        List<ProductResponseDTO> list = productService.getSellitems(id);
+
+        if(list!=null){
+            return ResponseEntity.ok().body(list);
+        }
+        else{
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
+    @GetMapping(path = "/activeproducts")
+    public ResponseEntity<?> getActiveProducts(){
+        List<ProductResponseDTO> list = productService.findActiveProducts();
+
+        if(list!=null){
+            return ResponseEntity.ok().body(list);
+        }
+        else{
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
+
+
+
+
 
 }
