@@ -6,6 +6,7 @@ import com.TradeSpot.DTO.CategoryResponseDTO;
 import com.TradeSpot.entities.ApiResponse;
 import com.TradeSpot.entities.Category;
 import com.TradeSpot.services.CategoryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    ModelMapper mapper;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse> addCategory(
@@ -68,6 +72,12 @@ public class CategoryController {
          return ResponseEntity.ok().body(new ApiResponse(categoryService.DeleteCategory(id)));
 
 
+    }
+
+    @GetMapping("/getbycategory/{name}")
+    public CategoryResponseDTO getcategory(@PathVariable String name){
+        Category category = categoryService.findByName(name);
+        return mapper.map(category, CategoryResponseDTO.class);
     }
 
 

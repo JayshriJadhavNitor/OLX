@@ -11,6 +11,6 @@ import java.util.List;
 public interface BroughtItemsRepo extends JpaRepository<BroughtItems, Long> {
 
 
-    @Query("SELECT bi.product FROM BroughtItems bi WHERE bi.buyer.id = :buyerId")
-    List<Product> findProductsByBuyerId(@Param("buyerId") Long buyerId);
+   // @Query("SELECT bi.product FROM BroughtItems bi WHERE bi.buyer.id = :buyerId")
+    List<Product> getProductByBuyerId(Long buyerId);
 }

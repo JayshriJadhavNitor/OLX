@@ -1,5 +1,6 @@
 package com.TradeSpot.controllers;
 
+import com.TradeSpot.DTO.CategoryDTO;
 import com.TradeSpot.DTO.ProductDTO;
 import com.TradeSpot.DTO.ProductResponseDTO;
 import com.TradeSpot.customException.CustomException;
@@ -29,23 +30,23 @@ public class ProductController {
 
 
 
-    @PostMapping(path="/{categoryName}/{userId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ApiResponse> addProduct(
-            @PathVariable String categoryName,
-            @PathVariable long userId,
-            @ModelAttribute ProductDTO productDTO,
-            @RequestPart("image") MultipartFile file) throws IOException {
-        Product product= productService.saveProduct(productDTO, categoryName, userId, file);
-        if(product!=null){
-            return ResponseEntity.ok().body(new ApiResponse("product added successfully"));
-        }
-        else{
-            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: product not added"));
-        }
-
-
-
-    }
+//    @PostMapping(path="/{categoryName}/{userId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<ApiResponse> addProduct(
+//            @PathVariable String categoryName,
+//            @PathVariable long userId,
+//            @ModelAttribute ProductDTO productDTO,
+//            @RequestPart("image") MultipartFile file) throws IOException {
+//        Product product= productService.saveProduct(productDTO, categoryName, userId, file);
+//        if(product!=null){
+//            return ResponseEntity.ok().body(new ApiResponse("product added successfully"));
+//        }
+//        else{
+//            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: product not added"));
+//        }
+//
+//
+//
+//    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ProductResponseDTO>> listAllProduct() throws CustomException {
@@ -87,5 +88,53 @@ public class ProductController {
         return ResponseEntity.ok().body(new ApiResponse(message));
 
     }
+
+    @PutMapping("/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable long productId, @RequestBody ProductDTO productDTO){
+
+        Product product= productService.upgradeProduct(productId, productDTO);
+
+        if(product != null){
+            return ResponseEntity.ok().body(new ApiResponse("Product updated successfully with id  "+ productId));
+
+        }
+        else{
+            return ResponseEntity.status(500).body(new ApiResponse("Unsuccessful: not updated with id "+productId));
+        }
+    }
+
+
+    @PostMapping(path="/{userId}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResponse> addProduct(
+            @PathVariable long userId,
+            @ModelAttribute ProductDTO productDTO,
+            @RequestParam String categoryName,
+            @RequestPart("image") MultipartFile file) throws IOException {
+
+
+        Product product= productService.saveProduct(productDTO, categoryName, userId, file);
+        if(product!=null){
+            return ResponseEntity.ok().body(new ApiResponse("product added successfully"));
+        }
+        else{
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: product not added"));
+        }
+
+
+
+    }
+
+    @GetMapping("/getproductbycategory/{categoryName}")
+    public ResponseEntity<?> getProductsByCategory(@PathVariable String categoryName){
+
+        List<ProductResponseDTO> dtoList=productService.findProductsByCategoryName(categoryName);
+        if(dtoList!=null){
+            return ResponseEntity.ok().body(dtoList);
+        }
+        else{
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
 
 }

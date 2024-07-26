@@ -4,6 +4,7 @@ package com.TradeSpot.services;
 
 import com.TradeSpot.DTO.UserDTO;
 import com.TradeSpot.DTO.UserRespDTO;
+import com.TradeSpot.DTO.UserUpdateDTO;
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.Roles;
 import com.TradeSpot.entities.User;
@@ -76,4 +77,17 @@ public class UserService {
     }
 
 
+    public User updateUser(long userId, UserUpdateDTO user) {
+
+        User newuser= userRepository.findById(userId).orElseThrow(() -> new CustomException("User is not found with id "+ userId));
+        newuser.setAddress(user.getAddress());
+        newuser.setFirstName(user.getFirstName());
+        newuser.setEmail(user.getEmail());
+        newuser.setLastName(user.getLastName());
+        System.out.println(newuser);
+        return userRepository.save(newuser);
+
+
+
+    }
 }

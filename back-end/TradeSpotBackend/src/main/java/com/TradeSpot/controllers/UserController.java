@@ -3,11 +3,8 @@ package com.TradeSpot.controllers;
 
 
 
-import com.TradeSpot.DTO.LoginDTO;
-import com.TradeSpot.DTO.LoginResponse;
-import com.TradeSpot.DTO.UserDTO;
+import com.TradeSpot.DTO.*;
 
-import com.TradeSpot.DTO.UserRespDTO;
 import com.TradeSpot.entities.ApiResponse;
 
 import com.TradeSpot.entities.User;
@@ -132,4 +129,21 @@ public class UserController {
             return  ResponseEntity.status(500).build();
         }
     }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUser( @RequestBody UserUpdateDTO userupdate, @PathVariable long userId){
+
+        User user = userservice.updateUser(userId, userupdate);
+        if(user != null){
+            return ResponseEntity.ok().body(new ApiResponse("User updated successfully with id  "+ userId));
+
+        }
+        else{
+            return ResponseEntity.status(500).body(new ApiResponse("Unsuccessful: not updated with id "+userId));
+        }
+
+    }
+
+
+
 }

@@ -9,5 +9,5 @@ public interface CategoryRepository extends JpaRepository<Category,Long> {
 
 
     @Query("SELECT c from Category c where c.name= :name")
-    public Category findByName(@Param("name") String name);
+    Category findByName(@Param("name") String name);
 }

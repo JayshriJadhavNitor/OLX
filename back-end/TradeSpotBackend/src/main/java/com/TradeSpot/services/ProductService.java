@@ -1,5 +1,6 @@
 package com.TradeSpot.services;
 
+import com.TradeSpot.DTO.CategoryDTO;
 import com.TradeSpot.DTO.ProductDTO;
 import com.TradeSpot.DTO.ProductResponseDTO;
 import com.TradeSpot.customException.CustomException;
@@ -47,19 +48,14 @@ public class ProductService {
 
 
         Category category= categoryService.findByName(categoryName);
+        System.out.println(category);
         User user = userRepository.findById(userId).orElseThrow();
 
-//        Product product= Product.builder()
-//                        .productName(productDTO.getProductName())
-//                                .productImgPath(filePath)
-//                                        .price(productDTO.getPrice())
-//                                                .addedDate(productDTO.getAddedDate())
-//                                                        .description(productDTO.getDescription())
-//                                                                .isActive(true)
-//                                                                        .build();
+
         Product product=mapper.map(productDTO, Product.class);
         product.setProductImgPath(filePath);
         product.setCategory(category);
+        product.setActive(true);
         product=productRepository.save(product);
          sellItemsServices.addSellProduct(user,product);
 
@@ -109,5 +105,24 @@ public class ProductService {
 
 
 
+    }
+
+    public Product upgradeProduct(long productId, ProductDTO productDTO) {
+
+        Product product = productRepository.findById(productId).orElseThrow(() -> new CustomException("Product not found with id " + productId));
+        product.setActive(true);
+        product.setProductName(productDTO.getProductName());
+        product.setDescription(productDTO.getDescription());
+        product.setAddedDate(productDTO.getAddedDate());
+        product.setPrice(productDTO.getPrice());
+
+        return productRepository.save(product);
+
+    }
+
+    public List<ProductResponseDTO> findProductsByCategoryName(String categoryName) {
+
+        List<Product> list = productRepository.getProductByCategoryName(categoryName);
+        return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).toList();
     }
 }

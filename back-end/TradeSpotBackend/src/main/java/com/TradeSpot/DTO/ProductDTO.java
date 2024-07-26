@@ -22,13 +22,13 @@ public class ProductDTO {
 
     private LocalDate addedDate;
 
-    private boolean isActive;
+
 
     public ProductDTO(String productName, String description, double price, LocalDate addedDate) {
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.addedDate = addedDate;
-        this.isActive=true;
+
     }
 }
