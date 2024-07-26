@@ -1,6 +1,8 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-
-declare var $: any; // Declare jQuery to avoid TypeScript errors
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+declare var $: any; 
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -12,6 +14,9 @@ export class AdminDashboardComponent {
   @ViewChild('sidebar', { static: false }) sidebar?: ElementRef<HTMLElement>;
   @ViewChild('sidebarOverlay', { static: false }) sidebarOverlay?: ElementRef<HTMLElement>;
 
+  handshake = faHandshake;
+  cart = faCartPlus;
+  buyer=faHandHoldingDollar
   constructor(private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {

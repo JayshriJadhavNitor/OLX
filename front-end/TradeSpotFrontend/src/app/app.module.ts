@@ -16,10 +16,7 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { AboutusComponent } from './components/layout/footer/aboutus/aboutus.component';
 import { FaqComponent } from './components/layout/footer/faq/faq.component';
 import { FeaturesComponent } from './components/layout/footer/features/features.component';
-import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
-import { UserDashComponent } from './components/user/user-dash/user-dash.component';
 import { ContactComponent } from './components/layout/footer/contact/contact.component';
-import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layout.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
@@ -45,10 +42,7 @@ const routes: Routes = [
     AboutusComponent,
     FaqComponent,
     FeaturesComponent,
-    AdminDashboardComponent,
-    UserDashComponent,
     ContactComponent,
-    AdminLayoutComponent,
     ProductListComponent,
     ProductComponent,
     ProductsContainerComponent,
@@ -60,7 +54,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule,
-    FontAwesomeModule, // Import RouterModule and configure routes
+    FontAwesomeModule,
     ReactiveFormsModule
   ],
   providers: [ProductService],

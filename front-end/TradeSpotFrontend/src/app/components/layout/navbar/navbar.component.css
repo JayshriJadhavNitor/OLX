@@ -195,18 +195,28 @@ a:link{
   /* Add some space between input and button */
 }
 
-.profile-container {
+/* .profile-container {
   /* margin-left: auto;
   margin-left: 0; */
   /* margin: auto; */
   /* Pushes the profile container to the right */
-}
+/* } */
 
 
-.profile-img :hover {
+/* .profile-img :hover {
   background-color: green;
   color: #fff;
+} */
+.profile-img {
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
 }
+
+.profile-img:hover {
+  color: #f0f0f0;
+}
+
 
 .navbar-brand img {
   /* width: 65px; */

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { LoginComponent } from './components/registration/login/login.component';
 import { ForgotPasswordComponent } from './components/registration/forgot-password/forgot-password.component';
 import { RegisterComponent } from './components/registration/register/register.component';
@@ -8,10 +7,7 @@ import { CategoriesComponent } from './components/landing-page/categories/catego
 import { AboutusComponent } from './components/layout/footer/aboutus/aboutus.component';
 import { FaqComponent } from './components/layout/footer/faq/faq.component';
 import { FeaturesComponent } from './components/layout/footer/features/features.component';
-import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
-import { UserDashComponent } from './components/user/user-dash/user-dash.component';
 import { ContactComponent } from './components/layout/footer/contact/contact.component';
-import { AdminLayoutComponent } from './components/admin/admin-layout/admin-layout.component';
 import { ProductsContainerComponent } from './components/product/products-container/products-container.component';
 
 const routes: Routes = [
@@ -26,10 +22,9 @@ const routes: Routes = [
       { path: 'aboutus', component: AboutusComponent },
       { path: 'faq', component: FaqComponent },
       { path: 'features', component: FeaturesComponent },
-      { path: 'admin', component: AdminDashboardComponent }, // Admin Dashboard
-      { path: 'user', component: UserDashComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'products', component: ProductsContainerComponent}
+
     ]
   }
   // {
