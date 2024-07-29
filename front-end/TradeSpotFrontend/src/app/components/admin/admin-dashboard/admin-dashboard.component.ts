@@ -1,37 +1,61 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-
-declare var $: any; // Declare jQuery to avoid TypeScript errors
+import { faHandshake } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import { user } from 'src/app/models/user';
+import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
+declare var $: any;
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent {
-
+  
   @ViewChild('sidebar', { static: false }) sidebar?: ElementRef<HTMLElement>;
-  @ViewChild('sidebarOverlay', { static: false }) sidebarOverlay?: ElementRef<HTMLElement>;
+  @ViewChild('sidebarOverlay', { static: false })
+  sidebarOverlay?: ElementRef<HTMLElement>;
 
-  constructor(private renderer: Renderer2) { }
+  handshake = faHandshake;
+  cart = faCartPlus;
+  buyer = faHandHoldingDollar;
+  
+  buyerCount = 0;
+  sellerCount = 0;
+  productCount = 0;
+  recentUser:user[]=[];
 
-  ngAfterViewInit(): void {
-    this.setupSidebar();
+  constructor(private userService: UserService, private productService: ProductService) { }
+  ngOnInit() {
+    this.loadCount();
+    this.loadRecentUser();
   }
 
-  setupSidebar(): void {
-    if (this.sidebar && this.sidebarOverlay) {
-      $('#open-sidebar').click(() => {
-        this.renderer.addClass(this.sidebar!.nativeElement, 'active');
-        this.renderer.removeClass(this.sidebarOverlay!.nativeElement, 'd-none');
-      });
+  loadCount() {
+    this.userService.getBuyerCount().subscribe((result) => {
+      this.buyerCount=result
+    })
 
-      $('#sidebar-overlay').click(() => {
-        this.renderer.removeClass(this.sidebar!.nativeElement, 'active');
-        this.renderer.addClass(this.sidebarOverlay!.nativeElement, 'd-none');
+      this.userService.getBuyerCount().subscribe((result) => {
+        this.sellerCount = result;
       });
-    } else {
-      console.error('Sidebar or sidebarOverlay element is not available.');
-    }
+    
+    this.productService.listAllProducts().subscribe((result) => {
+      this.productCount = result.length;
+    })
+
   }
+
+  loadRecentUser() {
+    this.userService.getRecentUser().subscribe((result) => {
+      this.recentUser = result;
+    })
+  }
+
+ 
+ 
+
 
 }

@@ -3,43 +3,46 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models/product';
+import { ProductDTO } from '../models/productDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   
-  private apiUrl = 'http://localhost:8080/product'; 
+  private baseUrl = 'http://localhost:8080/product';
 
   constructor(private http: HttpClient) { }
 
-  // Get all products
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+  addProduct(categoryName: string, userId: number, productDTO: ProductDTO, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('categoryName', categoryName);
+    formData.append('image', file, file.name);
+    formData.append('productName', productDTO.productName);
+   
+    formData.append('description', productDTO.description);
+ 
+    formData.append('addedDate', productDTO.addedDate);
+    formData.append('price', productDTO.price.toString());
+   
+ 
+    return this.http.post<any>(`${this.baseUrl}/${userId}`, formData);
   }
-
-  // Get product by ID
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+ 
+  listAllProducts(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}`)
   }
-
-  // Search products
-  searchProducts(query: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}?q=${query}`);
+ 
+  findProductById(productId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${productId}`)
   }
-
-  // Create a new product
-  createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+ 
+  buyProduct(userId: number, productId: number): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/buyproduct/${userId}/${productId}`, {})
   }
-
-  // Update an existing product
-  updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
+ 
+  deleteProduct(productId: number): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${productId}`);
   }
-
-  // Delete a product
-  deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+ 
 }

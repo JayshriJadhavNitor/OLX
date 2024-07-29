@@ -28,8 +28,11 @@ export class CategoryService {
   }
 
   // Create a new category
-  createCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(this.apiUrl, category);
+  createCategory(category: Category, file: File): Observable<Category> {
+    const formData: FormData = new FormData();
+    formData.append('name', category.name);
+    formData.append('image', file, file.name);
+    return this.http.post<Category>(this.apiUrl, formData);
   }
 
   // Update an existing category

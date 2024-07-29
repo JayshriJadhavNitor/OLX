@@ -8,6 +8,8 @@ import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.Roles;
 import com.TradeSpot.entities.User;
 
+import com.TradeSpot.repositories.BroughtItemsRepo;
+import com.TradeSpot.repositories.SellItemsRepo;
 import com.TradeSpot.repositories.UserRepository;
 
 
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,12 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    private BroughtItemsRepo broughtItemsRepo;
+
+    @Autowired
+    private SellItemsRepo sellItemsRepo;
 
     public User addUser(UserDTO userDTO) {
 
@@ -73,6 +82,25 @@ public class UserService {
     public UserRespDTO findByEmail(String email){
         User user=userRepository.findByEmail(email).orElseThrow(()->new CustomException("User with email not exits"));
         return  mapper.map(user, UserRespDTO.class) ;
+    }
+
+    public long findBuyerCount() {
+
+        return broughtItemsRepo.findBuyerCount();
+    }
+
+    public long findSellerCount() {
+
+        return sellItemsRepo.findSellerCount();
+    }
+
+    public List<UserRespDTO> getRecentUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .sorted(Comparator.comparing(User::getId).reversed())
+                .limit(5)
+                .map(e->mapper.map(e,UserRespDTO.class))
+                .collect(Collectors.toList());
     }
 
 

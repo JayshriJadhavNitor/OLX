@@ -1,0 +1,26 @@
+<div style="text-align: center">
+  <h2><strong>Listing on Website</strong></h2>
+  <br />
+</div>
+<div class="div1">
+  <div *ngFor="let product of products">
+    <div class="card">
+      <img
+        src="/assets/{{ product.productImgPath.split('/').pop() }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ product.productName }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+
+        <h6 class="price">Price: {{ product.price }}</h6>
+        <button
+          class="btn {{ product.active ? 'btn-primary' : 'btn-success' }}"
+        >
+          {{ product.active ? "Remaining" : "Sold" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,14 @@
 
-<app-navbar></app-navbar>
+<ng-container *ngIf="showNavbar">
+  <app-navbar></app-navbar>
+</ng-container>
+
+<ng-container *ngIf="!showNavbar">
+  <app-admin-navbar></app-admin-navbar>
+</ng-container>
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="showProductsContainer">
-    <products-container></products-container>
-  </ng-container>
+
 
 <app-footer></app-footer>
 

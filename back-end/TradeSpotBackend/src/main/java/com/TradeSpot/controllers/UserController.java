@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -111,7 +112,7 @@ public class UserController {
     }catch (UsernameNotFoundException e){
         return ResponseEntity.status(404).build();
     }
-    String jwt=jwtService.generateToken(user.getUsername());
+    String jwt=jwtService.generateToken(user);
 
     return ResponseEntity.ok(new LoginResponse(jwt));
     }
@@ -132,4 +133,23 @@ public class UserController {
             return  ResponseEntity.status(500).build();
         }
     }
+
+
+    @GetMapping("/getBuyerCount")
+    public ResponseEntity<?> getBuyerCount(){
+
+        return  ResponseEntity.ok(userservice.findBuyerCount());
+    }
+
+    @GetMapping("/getSellerCount")
+    public ResponseEntity<?> getSellerCount(){
+
+        return  ResponseEntity.ok(userservice.findSellerCount());
+    }
+
+    @GetMapping("/recentUser")
+    public ResponseEntity<?> getRecentUser(){
+        return  ResponseEntity.ok(userservice.getRecentUsers());
+    }
+
 }
