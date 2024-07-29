@@ -29,7 +29,7 @@ public class CategoryController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ApiResponse> addCategory(
             @ModelAttribute CategoryDTO categoryDTO,
-            @RequestPart MultipartFile file) throws IOException {
+            @RequestPart("image") MultipartFile file) throws IOException {
         Category category= categoryService.saveCategory(categoryDTO, file);
         if(category!= null){
             return  ResponseEntity.ok().body(new ApiResponse("Category added successfully"));

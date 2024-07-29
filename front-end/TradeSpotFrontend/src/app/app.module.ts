@@ -21,7 +21,20 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { ProductsContainerComponent } from './components/product/products-container/products-container.component';
-
+import { AdminProductComponent } from './components/admin/admin-product/admin-product.component';
+import { MyListingsComponent } from './components/product/my-listings/my-listings.component';
+import { NewProductComponent } from './components/product/new-product/new-product.component';
+import { AdminNavbarComponent } from './components/admin/admin-navbar/admin-navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { NewCategoryComponent } from './components/admin/new-category/new-category.component';
+import { CategoryListComponent } from './components/admin/category-list/category-list.component';
 
 
 // Define your routes here
@@ -46,7 +59,14 @@ const routes: Routes = [
     ProductListComponent,
     ProductComponent,
     ProductsContainerComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    AdminProductComponent,
+    MyListingsComponent,
+    NewProductComponent,
+    MyListingsComponent,
+    AdminNavbarComponent,
+    NewCategoryComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +74,16 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule,
-    FontAwesomeModule,
-    ReactiveFormsModule
+    FontAwesomeModule, 
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatDialogModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

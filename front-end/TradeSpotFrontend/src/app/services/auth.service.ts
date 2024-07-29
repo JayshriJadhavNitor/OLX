@@ -19,6 +19,7 @@ export class AuthService {
   }
 
   login(loginRequest: login) {
+    console.log(loginRequest);
     return this.http.post(BASE_URL + "/user/login", loginRequest);
  
   }

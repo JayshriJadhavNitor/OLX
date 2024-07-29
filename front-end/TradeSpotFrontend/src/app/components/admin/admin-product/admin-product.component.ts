@@ -10,12 +10,17 @@ import { ProductService } from 'src/app/services/product.service';
 export class AdminProductComponent {
 
   constructor(private productService: ProductService) { }
+  products = [];
+  
+  ngOnInit() {
+    this.displayProduct();
+  }
   
   displayProduct() {
-    this.productService.getProducts().subscribe((result:Product[]) => {
-      for (let prod of result) {
-        // console.log(prod.);
-        
+    this.productService.listAllProducts().subscribe((result: Product[]) => {
+      if (result) {
+        console.log(result);
+          this.products=result
       }
     })
   }

@@ -51,9 +51,9 @@ public class JwtService {
                 .getPayload();
     }
 
-    public String generateToken(String email){
+    public String generateToken(UserDetails user){
         Map<String,Object> claims=new HashMap<>();
-        return createToken(claims,email);
+        return createToken(claims,user.getUsername());
     }
 
     public String createToken(Map<String, Object>claims, String email) {
