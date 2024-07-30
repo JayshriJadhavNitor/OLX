@@ -149,4 +149,17 @@ public class ProductService {
         return  list.stream().filter(product -> product.isActive())
                 .map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
     }
+    public List<ProductResponseDTO> findproducts(long id) {
+
+        List<Product> list= sellItemsServices.findProduct(id);
+
+        return list.stream().filter(Product::isActive).map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    public List<ProductResponseDTO> findproductsbyuserId(long id) {
+
+        List<Product> list= sellItemsServices.findProductsByUserId(id);
+
+        return list.stream().filter(Product::isActive).map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+    }
 }

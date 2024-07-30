@@ -1,13 +1,17 @@
+import { Injectable } from '@angular/core';
+import { CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 
-import {  CanActivateFn, RouterStateSnapshot, UrlTree } from '@angular/router';
+@Injectable({ providedIn: 'root' })
+export class AuthGuard {
+  constructor(private router: Router) {}
 
-
-
-export const authGuard: CanActivateFn = (route, state) => {
-  let result = localStorage.getItem("user");
-  if (result != null) return true;
-  else return false;
-};
-
-  
-
+  canActivate: CanActivateFn = (route, state) => {
+    const isLoggedIn = sessionStorage.getItem('user') !== null; 
+    if (isLoggedIn) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  };
+}

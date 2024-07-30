@@ -1,37 +1,16 @@
-<div class="ekart--product--details--info scroll">
-    <div class="ekart-product-detail-close">
-        <i class="fa fa-times" aria-hidden="true"></i>
+<div class="product-details-container">
+    <a routerLink='' class="btn btn-secondary back-button">Back</a>
+    <div class="detailsContainer">
+    <div class="product-details-content">
+      <div class="product-image">
+        <img src="/assets/{{product.productImgPath.split('/').pop()}}" alt="{{ product?.productName }}" />
+      </div>
+      <div class="product-info">
+        <h1>{{ product?.productName }}</h1>
+        <p>{{ product?.description }}</p>
+        <h2>Price: ₹{{ product?.price | number:'1.2-2' }}</h2>
+        <button  class="btn btn-primary">Contact Seller</button>
+      </div>
     </div>
-    <div class="ekart-product-detail-image">
-        <img [src]= product?.productImgPath class="ekart-product-detail-image">
-    </div>
-    
-    <div class="ekart-product-detail">
-        <div class="ekart-product-detail-name">
-            <h2>{{product?.productName}}</h2>
-        </div>
-        <div class="ekart-product-detail-gbc">
-            <span>MEN</span>
-            <span>NIKE</span>
-            <span>SPORTS</span>
-        </div>
-        <div class="ekart-product-detail-price">
-            <p>
-                <b>Price : {{product?.price}}</b>
-            </p>
-        </div>
-
-        <div class="ekart-product-detail-desc">
-            <div style="padding: 5px 0px;border-bottom: #ccc 2px solid">
-                <h4>Product Description</h4>
-            </div>
-            <div style="margin-top: 20px">
-                <p>DESCRIPTION</p>
-            </div>                
-        </div>
-    </div>
-    <div class="ekart-product-detail-addtoCart">
-        <button class="btn-add-to-cart">Contact Seller</button>
-    </div>
+  </div>
 </div>
-<div class="overlay"></div>

@@ -2,6 +2,7 @@
 package com.TradeSpot.entities;
 
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ public enum Roles {
 
     USER, ADMIN;
 
-    public List<SimpleGrantedAuthority> getAuthorities(){
-        List<SimpleGrantedAuthority> lst=new ArrayList<>();
+    public List<GrantedAuthority> getAuthorities(){
+        List<GrantedAuthority> lst=new ArrayList<>();
         lst.add(new SimpleGrantedAuthority("ROLE_"+this.name()));
         return lst;
     }

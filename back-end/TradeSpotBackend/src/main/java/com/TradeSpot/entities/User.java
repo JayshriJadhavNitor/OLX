@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +27,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 public class User extends BaseEntity implements UserDetails {
 
+
+    private static final Logger logger= LoggerFactory.getLogger(User.class);
 
     private String firstName;
     private String lastName;
@@ -49,9 +53,10 @@ public class User extends BaseEntity implements UserDetails {
 //	Implementation for UserDetails
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return role.getAuthorities();
+    public Collection<? extends SimpleGrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> lst= List.of(new SimpleGrantedAuthority("ROLE_"+role.name()));
+        logger.info("Authorities {} {}",lst,role.name());
+        return lst;
     }
 
 

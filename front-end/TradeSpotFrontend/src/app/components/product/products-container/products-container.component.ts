@@ -8,7 +8,5 @@ import { ProductListComponent } from '../product-list/product-list.component';
 })
 export class ProductsContainerComponent {
 
-  @ViewChild('productListComponent') prodListComponent ?: ProductListComponent;
-
   
 }

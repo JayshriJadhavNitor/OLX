@@ -109,6 +109,7 @@ public class UserController {
     }catch (UsernameNotFoundException e){
         return ResponseEntity.status(404).build();
     }
+        System.out.println(user.getAuthorities());
     String jwt=jwtService.generateToken(user);
 
     return ResponseEntity.ok(new LoginResponse(jwt));

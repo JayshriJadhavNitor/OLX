@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
         this.getUserByToken(result);
         this.router.navigateByUrl('/categories');
       }
+      
     })
   }
 

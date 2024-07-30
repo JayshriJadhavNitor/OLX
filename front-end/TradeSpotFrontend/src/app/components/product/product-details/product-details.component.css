@@ -1,110 +1,78 @@
-.overlay{
-    position: absolute; /* Sit on top of the page content */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.3); /* Black background with opacity */
-    z-index: 5; /* Specify a stack order in case you're using a different order for other elements */
-    cursor: pointer; /* Add a pointer on hover */
-}
+.product-details-container {
+    padding: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url("https://i.pinimg.com/originals/92/94/1d/92941d986586249ee79a24065f68c910.jpg");
 
-.ekart--product--details--info{
-    position: absolute;
-    z-index: 10;
-    background-color: white;
-    transition: 1s;
-    width: 480px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    padding: 10px 25px;
-}
-.ekart-product-detail-close{
-    text-align: right;
-    color:#28282B;
-    font-size: 20px;
-    font-weight: lighter;
-    padding: 5px 0px;
-}
-.ekart-product-detail-image{
+    
+  }
+  
+  .back-button {
+
+    top: 20px;
+    left: 20px;
+    z-index: 1000; 
+    background-color: black;
+
+    /* Ensure it's above other content */
+  }
+  .detailsContainer{
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.926);
+    margin: 5px;
+    border-radius: 8px;
+
+  }
+  .product-details-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 30px; /* Adjust based on the height of the back button */
+  }
+  
+  .product-image {
+    flex: 1;
+    min-width: 450px;
+    min-height: 500px;
+    margin-right: 50px;
+    object-fit: cover;
+  }
+  
+  .product-image img {
     width: 100%;
-    height: 320px;
-}
-.ekart-product-detail{
-    padding: 10px 0px;
-}
-.ekart-product-detail-gbc{
-    margin: 20px 0px;
-}
-
-.ekart-product-detail-gbc > span{
-    background-color: #36454F;
-    margin-left: 0px;
-    padding: 5px 20px;
-    font-size: 14px;
-    color: white;
-}
-
-.ekart-product-detail-name{
-    margin: 20px auto;
-}
-.ekart-product-detail-price{
-    font-size: 14px;
-    margin:30px 0px;
-    padding: 25px 10px;
-    background-color: #FCF55F;
-    border:#FFC000 2px solid;
-    border-radius: 5px;
-}
-.ekart-product-detail-size{
-    margin: 30px 0px;
-}
-span{
-    padding: 5px 10px;
-    margin: 5px 5px;
-    border-radius: 5px;
-}
-.ekart-product-detail-available-size{
-    margin: 0px 0px;
-    background-color: #28282B; 
-    color:white;
-    border-radius: 0px;
-    padding: 10px 15px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .product-info {
+    flex: 2;
+  }
+  
+  .product-info h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: 800;
+  }
+  
+  .product-info p {
     font-size: 16px;
-}
-.ekart-product-detail-available-color{
-    border-radius: 50%;
-    padding: 8px 18px;
-}
-.ekart-product-detail-desc{
-    margin-top: 30px;
-    font-size: 14px;
-}
-.ekart-product-detail-addtoCart{
-    margin: 20px 0px;
-}
-.btn-add-to-cart{
-    border: none;
-    background-color: #28282B;
-    padding: 10px 30px;
-    font-size: 20px;
-    color: #fff;
-}
-
-.scroll {
-    overflow-y: scroll;
-}
-.scroll::-webkit-scrollbar {
-    width:5px;
-}
-.scroll::-webkit-scrollbar-track {
-    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius:5px;
-}
-.scroll::-webkit-scrollbar-thumb {
-    border-radius:5px;
-    -webkit-box-shadow: inset 0 0 6px #28282B; 
-}
+    margin-bottom: 20px;
+  }
+  
+  .product-info h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .product-info .btn {
+    margin-top: 10px;
+    background-color: black;
+    border: 0;
+  }
+  .btn:hover {
+    background-color: #f9fafc;
+    border-color: #0a0a0a;
+    color: #0a0a0a;
+    font-weight: 500;
+  }

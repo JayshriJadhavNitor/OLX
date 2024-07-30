@@ -35,4 +35,14 @@ public class SellItemService {
 
         return sellrepo.findSellProduct(id);
     }
+
+    public List<Product> findProduct(long id) {
+
+        return sellrepo.findProduct(id);
+    }
+
+    public List<Product> findProductsByUserId(long id) {
+
+        return sellrepo.findProductsByUserId(id);
+    }
 }

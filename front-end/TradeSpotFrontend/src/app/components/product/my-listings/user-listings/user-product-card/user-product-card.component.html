@@ -5,7 +5,6 @@
       <!-- <p class="card-text">{{product.description}}</p>
        -->
       <h6 class="price">Price: {{product?.price}}</h6>
-      <!-- <a href="#" class="btn btn-primary ">Details</a> -->
-      <a routerLink="/productDetails/+{{product.id}}" class="btn btn-primary ">Details</a>
+      <a class="btn btn-primary" (click)="onRemove()">Remove</a>
     </div>
   </div>

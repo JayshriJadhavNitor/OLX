@@ -9,31 +9,64 @@ import { SearchService } from 'src/app/services/search.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   products: Product[] = [];
-
-  selectedProduct: Product;
 
   @Input()
   searchText: string = '';
 
   subscription: Subscription;
 
-  constructor(private searchService: SearchService,private productService:ProductService) {
-    this.subscription = this.searchService
-      .getSearchText()
-      .subscribe((searchText) => {
+  userId: number | null = null;
+
+  constructor(
+    private searchService: SearchService,
+    private productService: ProductService
+  ) {
+    this.subscription = this.searchService.getSearchText().subscribe(
+      (searchText) => {
         this.searchText = searchText;
+
         // Optionally, trigger search/filter logic based on searchText
-      });
+      },
+
+          );
   }
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.userId =
+      JSON.parse(sessionStorage.getItem('user')) &&
+      JSON.parse(sessionStorage.getItem('user')).id;
+
+    this.loadProductsBasedOnState();
+  }
+
+  loadProductsBasedOnState(): void {
+    if (this.userId) {
+      this.loadUserBasedProducts(this.userId);
+    } else {
+      this.loadProducts();
+    }
   }
 
   loadProducts(): void {
     this.productService.listAllProducts().subscribe(
+      (product:Product[]) => {
+        this.products = product.map((product) => ({
+          ...product,
+          productImgPath: `${product.productImgPath.substring(
+            product.productImgPath.indexOf('/assets') + '/assets'.length
+          )}`,
+        }));
+      },
+      (error) => {
+        console.error('Error loading products:', error);
+      }
+    );
+  }
+
+  loadUserBasedProducts(userId: number): void {
+    this.productService.getProducts(userId).subscribe(
       (product) => {
         this.products = product.map((product) => ({
           ...product,
@@ -52,15 +85,5 @@ export class ProductListComponent {
     this.subscription.unsubscribe();
 
     // constructor(private productService: ProductService) { }
-
-    // ngOnInit(): void {
-    //   this.loadProducts();
-    // }
-
-    // loadProducts(): void {
-    //   this.productService.getProducts()
-    //     .subscribe(products => {
-    //       this.products = products;
-    //     });
   }
 }

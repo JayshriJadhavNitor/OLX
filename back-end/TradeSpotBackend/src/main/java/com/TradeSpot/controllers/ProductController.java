@@ -172,6 +172,34 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/getproducts/{id}")
+    public ResponseEntity<?> getProducts(@PathVariable long id){
+
+        List<ProductResponseDTO> list = productService.findproducts(id);
+
+        if(!list.isEmpty()){
+            return ResponseEntity.ok().body(list);
+        }
+        else{
+            System.out.println("in empty mail");
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
+    @GetMapping(path = "/getproductsbyuserId/{id}")
+    public ResponseEntity<?> getProductsByUserId(@PathVariable long id){
+
+        List<ProductResponseDTO> list = productService.findproductsbyuserId(id);
+
+        if(!list.isEmpty()){
+            return ResponseEntity.ok().body(list);
+        }
+        else{
+            System.out.println("in empty mail");
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
 
 
 

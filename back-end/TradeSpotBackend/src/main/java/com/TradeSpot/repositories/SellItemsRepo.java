@@ -17,6 +17,12 @@ public interface SellItemsRepo extends JpaRepository<SellItems, Long> {
     @Query("SELECT bi.sellproduct FROM SellItems bi WHERE bi.seller.id = :buyerId")
     List<Product> findSellProduct(@Param("buyerId") long id);
 
+    @Query("SELECT bi.sellproduct FROM SellItems bi WHERE bi.seller.id != :buyerId")
+    List<Product> findProduct(@Param("buyerId") long id);
+
+    @Query("SELECT bi.sellproduct FROM SellItems bi WHERE bi.seller.id = :buyerId")
+    List<Product> findProductsByUserId(@Param("buyerId") long id);
+
 //    @Query("SELECT si.product FROM SellItems si WHERE si.buyer.id = :userId")
 //    List<Product> getsellingProduct(@Param("userId") Long userId);
 

@@ -4,8 +4,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.crypto.SecretKey;
+
+import com.TradeSpot.entities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +25,13 @@ public class JwtService {
 
     private final String SECRET_KEY="7b2598c3b4faa9969c0a24c9dc57cd482b9f8a48c984ba22df35c3377aebada3";
 
+    private final Logger logger= LoggerFactory.getLogger(JwtService.class);
+
     public String extractUsername(String token) {
+        return extractClaims(token, Claims::getSubject);
+    }
+
+    public String extracRoles(String token) {
         return extractClaims(token, Claims::getSubject);
     }
 
@@ -43,7 +55,7 @@ public class JwtService {
     }
 
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return  Jwts.parser()
                 .verifyWith(getSignInKey())
                 .build()
@@ -52,7 +64,10 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails user){
-        Map<String,Object> claims=new HashMap<>();
+        Map<String, Object> claims = new HashMap<>();
+        System.out.println(user.getAuthorities());
+        claims.put("roles", user.getAuthorities());
+        logger.info("Generating claims:{}",user.getAuthorities());
         return createToken(claims,user.getUsername());
     }
 

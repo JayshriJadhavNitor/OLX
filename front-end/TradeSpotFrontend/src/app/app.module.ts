@@ -35,6 +35,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { NewCategoryComponent } from './components/admin/new-category/new-category.component';
 import { CategoryListComponent } from './components/admin/category-list/category-list.component';
+import { CommonModule } from '@angular/common';
+import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { UserListingsComponent } from './components/product/my-listings/user-listings/user-listings.component';
+import { UserProductCardComponent } from './components/product/my-listings/user-listings/user-product-card/user-product-card.component';
 
 
 // Define your routes here
@@ -61,20 +65,24 @@ const routes: Routes = [
     ProductsContainerComponent,
     ProductDetailsComponent,
     AdminProductComponent,
+    AdminDashboardComponent,
     MyListingsComponent,
     NewProductComponent,
     MyListingsComponent,
     AdminNavbarComponent,
     NewCategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    UserListingsComponent,
+    UserProductCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     HttpClientModule,
     FormsModule,
     RouterModule,
-    FontAwesomeModule, 
+    FontAwesomeModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -83,13 +91,9 @@ const routes: Routes = [
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [ProductService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { 
-
-  
-
-}
+export class AppModule {}

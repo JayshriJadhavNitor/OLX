@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductListComponent } from '../product-list/product-list.component';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'product-details',
   templateUrl: './product-details.component.html',
@@ -9,13 +11,19 @@ import { ProductListComponent } from '../product-list/product-list.component';
 export class ProductDetailsComponent {
 
    
-   @Input()
-   productListComp: ProductListComponent = undefined;
+   product: Product | undefined;
 
-   product: Product ;
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService
+  ) { }
 
-   ngOnInit(){
-    this.product = this.productListComp.selectedProduct;
-   }
-
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+      this.productService.findProductById(id).subscribe(product => {
+        this.product = product;
+      });
+    });
+  }
 }

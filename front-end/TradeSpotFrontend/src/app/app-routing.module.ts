@@ -13,28 +13,50 @@ import { NewProductComponent } from './components/product/new-product/new-produc
 import { AdminProductComponent } from './components/admin/admin-product/admin-product.component';
 import { NewCategoryComponent } from './components/admin/new-category/new-category.component';
 import { CategoryListComponent } from './components/admin/category-list/category-list.component';
-import { authGuard } from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
+import { UserListingsComponent } from './components/product/my-listings/user-listings/user-listings.component';
 
 const routes: Routes = [
-      { path: '', redirectTo: '/categories', pathMatch: 'full' },
-      { path: 'categories', component: CategoriesComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'forgotpassword', component: ForgotPasswordComponent },
-      { path: 'register', component: RegisterComponent },
-      { path: 'aboutus', component: AboutusComponent },
-      { path: 'faq', component: FaqComponent },
-      { path: 'features', component: FeaturesComponent },
-      { path: 'admin', component: AdminDashboardComponent,canActivate:[authGuard] }, // Admin Dashboard
-      { path: 'contact', component: ContactComponent },
-      { path: 'products', component: ProductsContainerComponent },
-      { path: 'addProduct', component: NewProductComponent,canActivate:[authGuard] },
-      { path: 'admin-product', component: AdminProductComponent,canActivate:[authGuard] },
-      {path:'adminCategory',component:CategoryListComponent,canActivate:[authGuard]}
+  { path: '', component: CategoriesComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'aboutus', component: AboutusComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'features', component: FeaturesComponent },
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'contact', component: ContactComponent },
+  { path: 'products', component: ProductsContainerComponent },
+  {
+    path: 'addProduct',
+    component: NewProductComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin-product',
+    component: AdminProductComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'adminCategory',
+    component: CategoryListComponent,
+    canActivate: [AuthGuard],
+  },
+
+  { path: 'userListings', component: UserListingsComponent },
+  { path: 'productDetails/:id', component: ProductDetailsComponent },
+  { path: '**', component: CategoriesComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

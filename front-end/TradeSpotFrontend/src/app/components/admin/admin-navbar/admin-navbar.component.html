@@ -57,7 +57,7 @@
       <a mat-list-item routerLink="/admin-product" routerLinkActive="active-link">Product</a>
       <a mat-list-item routerLink="/adminCategory" routerLinkActive="active-link">Category</a>
       <a mat-list-item routerLink="/about" routerLinkActive="active-link">About</a>
-      <a mat-list-item routerLinkActive="active-link">Logout</a>
+      <a mat-list-item routerLinkActive="active-link" (click)="logout()">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-toolbar color="primary" class="main-toolbar">
