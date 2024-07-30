@@ -17,7 +17,7 @@ export class ProductListComponent implements OnInit {
 
   subscription: Subscription;
 
-  userId: number | null = null;
+  // userId: number | null = null;
 
   constructor(
     private searchService: SearchService,
@@ -34,20 +34,20 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId =
-      JSON.parse(sessionStorage.getItem('user')) &&
-      JSON.parse(sessionStorage.getItem('user')).id;
+    // this.userId =
+    //   JSON.parse(sessionStorage.getItem('user')) &&
+    //   JSON.parse(sessionStorage.getItem('user')).id;
 
-    this.loadProductsBasedOnState();
+    this.loadProducts();
   }
 
-  loadProductsBasedOnState(): void {
-    if (this.userId) {
-      this.loadUserBasedProducts(this.userId);
-    } else {
-      this.loadProducts();
-    }
-  }
+  // loadProductsBasedOnState(): void {
+  //   if (this.userId) {
+  //     this.loadUserBasedProducts(this.userId);
+  //   } else {
+  //     this.loadProducts();
+  //   }
+  // }
 
   loadProducts(): void {
     this.productService.listAllProducts().subscribe(
@@ -65,21 +65,21 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  loadUserBasedProducts(userId: number): void {
-    this.productService.getProducts(userId).subscribe(
-      (product) => {
-        this.products = product.map((product) => ({
-          ...product,
-          productImgPath: `${product.productImgPath.substring(
-            product.productImgPath.indexOf('/assets') + '/assets'.length
-          )}`,
-        }));
-      },
-      (error) => {
-        console.error('Error loading products:', error);
-      }
-    );
-  }
+  // loadUserBasedProducts(userId: number): void {
+  //   this.productService.getProducts(userId).subscribe(
+  //     (product) => {
+  //       this.products = product.map((product) => ({
+  //         ...product,
+  //         productImgPath: `${product.productImgPath.substring(
+  //           product.productImgPath.indexOf('/assets') + '/assets'.length
+  //         )}`,
+  //       }));
+  //     },
+  //     (error) => {
+  //       console.error('Error loading products:', error);
+  //     }
+  //   );
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
