@@ -38,14 +38,18 @@ public class Product extends BaseEntity {
     private String productImgPath;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="category_id")
     private Category category;
+
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     List<BroughtItems> productBroughtItemsList=new ArrayList<>();
 
-    @OneToMany(mappedBy = "sellproduct", cascade = CascadeType.ALL)
-    List<SellItems> sellItemsList=new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+
 
 
     private boolean isActive;

@@ -62,9 +62,9 @@ public class ProductController {
     }
 
     @GetMapping(path = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ProductDTO> findProductById(@PathVariable long productId) throws CustomException {
+    public ResponseEntity<?> findProductById(@PathVariable long productId) throws CustomException {
 
-        ProductDTO productDTO= productService.getProductById(productId);
+        ProductResponseDTO productDTO= productService.getProductById(productId);
         if(productDTO!=null){
             return ResponseEntity.ok(productDTO);
         }
@@ -89,10 +89,12 @@ public class ProductController {
 
     }
 
-    @PutMapping("/{productId}")
-    public ResponseEntity<?> updateProduct(@PathVariable long productId, @RequestBody ProductDTO productDTO){
+    @PutMapping(path = "/{productId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateProduct(@PathVariable long productId,
+                                           @ModelAttribute ProductDTO productDTO,
+                                           @RequestPart MultipartFile file) throws IOException {
 
-        Product product= productService.upgradeProduct(productId, productDTO);
+        Product product= productService.updateProduct(productId, productDTO, file);
 
         if(product != null){
             return ResponseEntity.ok().body(new ApiResponse("Product updated successfully with id  "+ productId));
@@ -138,7 +140,7 @@ public class ProductController {
 
     @GetMapping("/getbuyproduct/{id}")
     public ResponseEntity<?> getBroughtitmes(@PathVariable long id){
-         List<ProductResponseDTO> list = productService.getBuyitems(id);
+         List<ProductResponseDTO> list = productService.getBuyItems(id);
 
         if(list!=null){
             return ResponseEntity.ok().body(list);
@@ -150,7 +152,7 @@ public class ProductController {
 
     @GetMapping("/getsellproduct/{id}")
     public ResponseEntity<?> getSellItmes(@PathVariable long id){
-        List<ProductResponseDTO> list = productService.getSellitems(id);
+        List<ProductResponseDTO> list = productService.getListedProduct(id);
 
         if(list!=null){
             return ResponseEntity.ok().body(list);
@@ -172,10 +174,24 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/getproducts/{id}")
-    public ResponseEntity<?> getProducts(@PathVariable long id){
+    @GetMapping("/getproducts/{userId}")
+    public ResponseEntity<?> otherUserProducts(@PathVariable long userId){
 
-        List<ProductResponseDTO> list = productService.findproducts(id);
+        List<ProductResponseDTO> list = productService.findOtherUsersProducts(userId);
+
+        if(!list.isEmpty()){
+            return ResponseEntity.ok().body(list);
+        }
+        else{
+            System.out.println("in empty mail");
+            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
+        }
+    }
+
+    @GetMapping(path = "/getproductsbyuserId/{userId}")
+    public ResponseEntity<?> getActiveProductsByUserId(@PathVariable long userId){
+
+        List<ProductResponseDTO> list = productService.findActiveProductsByUserId(userId);
 
         if(!list.isEmpty()){
             return ResponseEntity.ok().body(list);
@@ -186,19 +202,14 @@ public class ProductController {
         }
     }
 
-    @GetMapping(path = "/getproductsbyuserId/{id}")
-    public ResponseEntity<?> getProductsByUserId(@PathVariable long id){
+    @GetMapping("/getSellerCount")
+    public ResponseEntity<?> getSellerCount(){
 
-        List<ProductResponseDTO> list = productService.findproductsbyuserId(id);
-
-        if(!list.isEmpty()){
-            return ResponseEntity.ok().body(list);
-        }
-        else{
-            System.out.println("in empty mail");
-            return  ResponseEntity.ok().body(new ApiResponse("unsuccessful: products not find"));
-        }
+        long count = productService.getSellerCount();
+        return  ResponseEntity.ok().body(count);
     }
+
+
 
 
 

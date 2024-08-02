@@ -9,6 +9,7 @@ import com.TradeSpot.entities.Product;
 import com.TradeSpot.entities.User;
 import com.TradeSpot.repositories.ProductRepository;
 import com.TradeSpot.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,27 +40,30 @@ public class ProductService {
     private Imageservice imageservice;
 
     @Autowired
-    private  SellItemService sellItemsServices;
+    private UserService userService;
+
+
+
 
     @Autowired
     private BroughtItemService broughtItemsServices;
 
+    @Transactional
     public Product saveProduct(ProductDTO productDTO, String categoryName, Long userId, MultipartFile file) throws IOException {
 
-        String filePath= imageservice.uploadFile(file, "Product");
-
-
         Category category= categoryService.findByName(categoryName);
-        System.out.println(category);
+
         User user = userRepository.findById(userId).orElseThrow();
+        String filePath= imageservice.uploadFile(file);
 
 
         Product product=mapper.map(productDTO, Product.class);
         product.setProductImgPath(filePath);
         product.setCategory(category);
+        product.setUser(user);
         product.setActive(true);
         product=productRepository.save(product);
-         sellItemsServices.addSellProduct(user,product);
+
 
          return product;
 
@@ -74,11 +78,11 @@ public class ProductService {
         return productList.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
     }
 
-    public ProductDTO getProductById(long productId) throws CustomException {
+    public ProductResponseDTO getProductById(long productId) throws CustomException {
         Product product = productRepository.findById(productId)
                                      .orElseThrow(()-> new CustomException("Product not found with id : "+ productId));
 
-        return mapper.map(product, ProductDTO.class);
+        return mapper.map(product, ProductResponseDTO.class);
 
     }
 
@@ -86,7 +90,7 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                                      .orElseThrow(()-> new CustomException("Product not found with id : "+ productId));
 
-        product.setCategory(null);
+
 
         productRepository.deleteById(productId);
         return "Product deleted successfully";
@@ -94,6 +98,7 @@ public class ProductService {
 
     }
 
+    @Transactional
     public void buyProduct(long userid, long productid) {
 
         User user=userRepository.findById(userid).orElseThrow();
@@ -109,7 +114,7 @@ public class ProductService {
 
     }
 
-    public Product upgradeProduct(long productId, ProductDTO productDTO) {
+    public Product updateProduct(long productId, ProductDTO productDTO, MultipartFile file) throws IOException {
 
         Product product = productRepository.findById(productId).orElseThrow(() -> new CustomException("Product not found with id " + productId));
         product.setActive(true);
@@ -117,6 +122,11 @@ public class ProductService {
         product.setDescription(productDTO.getDescription());
         product.setAddedDate(productDTO.getAddedDate());
         product.setPrice(productDTO.getPrice());
+
+        String filePath = imageservice.uploadFile(file);
+
+        product.setProductImgPath(filePath);
+       // product = productRepository.save(product);
 
         return productRepository.save(product);
 
@@ -128,38 +138,45 @@ public class ProductService {
         return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).toList();
     }
 
-    public List<ProductResponseDTO> getBuyitems(long id){
-        List<Product> products= broughtItemsServices.productList(id);
+    public List<ProductResponseDTO> getBuyItems(long userId){
+        List<Product> products= broughtItemsServices.productList(userId);
 
         return products.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).toList();
 
     }
 
+    @Transactional
+    public List<ProductResponseDTO> getListedProduct(long userId) {
 
-    public List<ProductResponseDTO> getSellitems(long id) {
-
-        List<Product> list = sellItemsServices.findSellingList(id);
+        List<Product> list = userService.listUserProducts(userId);
         return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
     }
 
 
     public List<ProductResponseDTO> findActiveProducts() {
 
-        List<Product> list = productRepository.findAll();
-        return  list.stream().filter(product -> product.isActive())
-                .map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
-    }
-    public List<ProductResponseDTO> findproducts(long id) {
 
-        List<Product> list= sellItemsServices.findProduct(id);
-
-        return list.stream().filter(Product::isActive).map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+        List<Product> productList =  productRepository.getActiveProducts();
+        return  productList.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
     }
 
-    public List<ProductResponseDTO> findproductsbyuserId(long id) {
+    public List<ProductResponseDTO> findOtherUsersProducts(long userId) {
 
-        List<Product> list= sellItemsServices.findProductsByUserId(id);
+        List<Product> list = productRepository.listOthersProducts( userId);
 
-        return list.stream().filter(Product::isActive).map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+        return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ProductResponseDTO> findActiveProductsByUserId(long userId) {
+
+        List<Product> list= productRepository.listUserActiveProducts(userId);
+
+        return list.stream().map(product -> mapper.map(product, ProductResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    public long getSellerCount() {
+
+        return productRepository.getSellerCount();
     }
 }
