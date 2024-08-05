@@ -4,7 +4,8 @@
       <h5 class="card-title">{{product?.productName}}</h5>
       <!-- <p class="card-text">{{product.description}}</p>
        -->
-      <h6 class="price">Price: {{product?.price}}</h6>
+      <h6 class="price"> {{ product?.price | currency:'INR':'symbol':'1.2-2' }}</h6>
+      
       <!-- <a href="#" class="btn btn-primary ">Details</a> -->
       <a routerLink="/productDetails/+{{product.id}}" class="btn btn-primary ">Details</a>
     </div>

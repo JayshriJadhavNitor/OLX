@@ -1,8 +1,13 @@
 /* src/app/components/home/home.component.css */
 .home-container {
-  font-family: Arial, sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   margin: 0;
+  font-size: 15px;
 
+}
+
+h3{
+  font-weight: 700;
 }
 
 
@@ -10,11 +15,16 @@
   margin-bottom: 30px;
 }
 
+h2{
+  font-family: 'Times New Roman', Times, serif;
+}
+
 .categories h2 {
   font-size: 2em;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: center;
   color: #0b0b0b;
+  
 }
 
 .category-list {
@@ -41,12 +51,12 @@
   /* Ensures padding and border are included in the width */
   background: #fff;
   /* 3D Shadow Effect */
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 15px 30px -12px, rgba(0, 0, 0, 0.3) 0px 10px 20px -18px;
   
 }
 
 .category-card {
-  width: 280px;
+  width: 200px;
   /* Increased width */
   text-align: center;
   border: 1px solid #ddd;
@@ -80,9 +90,9 @@
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
   transition: 1s ease;
 }
 
@@ -174,4 +184,37 @@
 .product-card {
   animation: fadeIn 0.5s ease-in;
 
+}
+
+.div1 {
+  
+  margin: 15px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* border: 1px solid #ddd; Border color */
+  padding: 30px;
+  /* Padding inside the border */
+  border-radius: 8px;
+  /* Rounded corners for the border */
+  max-width: 100%;
+  /* Ensures the container doesn't overflow its parent */
+  margin: 0 auto;
+  /* Centers the container horizontally */
+  box-sizing: border-box;
+  /* Ensures padding and border are included in the width */
+  background: #fff;
+  /* 3D Shadow Effect */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+
+}
+
+.categoryHeading{
+  display: flex;
+  justify-content: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2em;
+  margin: 10px;
 }

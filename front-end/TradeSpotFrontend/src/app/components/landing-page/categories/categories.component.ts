@@ -2,7 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Category } from 'src/app/models/category';
+import { Product } from 'src/app/models/product';
 import { CategoryService } from 'src/app/services/category.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-categories',
@@ -11,8 +13,14 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
+  products: Product[] = [];
+  currentCategory: string;
 
-  constructor(private categoryService: CategoryService) { }
+  toggle: boolean = true
+
+  constructor(private categoryService: CategoryService , private productService: ProductService) {
+    
+   }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -33,10 +41,19 @@ export class CategoriesComponent implements OnInit {
   }
 
   loadProductsByCategory(categoryName: string): void {
-    // Implement logic to load products by category
-  }
+    this.currentCategory = categoryName;
+     this.productService.getProductsByCategory(categoryName).subscribe(
+      (product) => {
+        this.products = product.map(product => ({
+          ...product,
+          productImgPath: `${product.productImgPath.substring(product.productImgPath.indexOf('/assets') + '/assets'.length)}`
+        }));
+      },
+      (error) => {
+        console.error('Error loading products:', error);
+      }
+    );
 
-  onSearch(): void {
-    // Implement search functionality if needed
+    this.toggle = false;
   }
 }

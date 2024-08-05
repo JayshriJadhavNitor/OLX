@@ -7,56 +7,61 @@ import { SearchService } from 'src/app/services/search.service';
 @Component({
   selector: 'product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css'],
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = [];
 
+
+  products:Product[] = [];
+  
+  
   @Input()
   searchText: string = '';
 
   subscription: Subscription;
 
-  // userId: number | null = null;
+  // userId: number = 0;
 
-  constructor(
-    private searchService: SearchService,
-    private productService: ProductService
-  ) {
-    this.subscription = this.searchService.getSearchText().subscribe(
-      (searchText) => {
-        this.searchText = searchText;
 
-        // Optionally, trigger search/filter logic based on searchText
-      },
+  constructor(private searchService: SearchService, private productService: ProductService  ) {
+   
+    this.subscription = this.searchService.getSearchText().subscribe(searchText => {
+      this.searchText = searchText;
+      
+      
+    },
 
-          );
+    
+   
+  );
+    
   }
 
-  ngOnInit(): void {
-    // this.userId =
-    //   JSON.parse(sessionStorage.getItem('user')) &&
-    //   JSON.parse(sessionStorage.getItem('user')).id;
+ 
 
+
+  ngOnInit(): void {
+    // this.userId = JSON.parse(sessionStorage.getItem("user")) && JSON.parse(sessionStorage.getItem("user")).id;
+    
     this.loadProducts();
+    
   }
 
   // loadProductsBasedOnState(): void {
   //   if (this.userId) {
   //     this.loadUserBasedProducts(this.userId);
+     
   //   } else {
   //     this.loadProducts();
   //   }
   // }
 
   loadProducts(): void {
-    this.productService.listAllProducts().subscribe(
-      (product:Product[]) => {
-        this.products = product.map((product) => ({
+    this.productService.getActiveProducts().subscribe(
+      (product) => {
+        this.products = product.map(product => ({
           ...product,
-          productImgPath: `${product.productImgPath.substring(
-            product.productImgPath.indexOf('/assets') + '/assets'.length
-          )}`,
+          productImgPath: `${product.productImgPath.substring(product.productImgPath.indexOf('/assets') + '/assets'.length)}`
         }));
       },
       (error) => {
@@ -65,25 +70,27 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  // loadUserBasedProducts(userId: number): void {
+  // loadUserBasedProducts(userId:number): void{
   //   this.productService.getProducts(userId).subscribe(
   //     (product) => {
-  //       this.products = product.map((product) => ({
+  //       this.products = product.map(product => ({
   //         ...product,
-  //         productImgPath: `${product.productImgPath.substring(
-  //           product.productImgPath.indexOf('/assets') + '/assets'.length
-  //         )}`,
+  //         productImgPath: `${product.productImgPath.substring(product.productImgPath.indexOf('/assets') + '/assets'.length)}`
   //       }));
   //     },
   //     (error) => {
   //       console.error('Error loading products:', error);
   //     }
-  //   );
+  //   )
   // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
 
-    // constructor(private productService: ProductService) { }
-  }
+  // constructor(private productService: ProductService) { }
+
+
+  
+
+}
 }
