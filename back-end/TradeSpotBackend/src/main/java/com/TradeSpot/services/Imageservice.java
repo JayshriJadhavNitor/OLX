@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 
 @Service
@@ -17,12 +18,12 @@ public class Imageservice {
 
     @Value("${project.image}")
     private String path;
-    public String uploadFile( MultipartFile file, String className) throws IOException {
+    public String uploadFile( MultipartFile file) throws IOException {
 
         String filePath;
         String name= file.getOriginalFilename();
 
-        filePath= path+name;
+        filePath= path+ UUID.randomUUID().toString().replaceAll("-", "")+name;
 
         File f= new File(path);
 

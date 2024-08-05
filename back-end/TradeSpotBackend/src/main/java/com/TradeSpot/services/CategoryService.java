@@ -27,7 +27,7 @@ public class CategoryService {
 
     public Category saveCategory(CategoryDTO categoryDTO, MultipartFile file) throws IOException {
 
-        String imgPath= imageservice.uploadFile(file, "Category");
+        String imgPath= imageservice.uploadFile(file);
 
 //
         Category category= Category.builder().name(categoryDTO.getName())
@@ -35,10 +35,10 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public List<CategoryResponseDTO> findAllCategories() {
+    public List<Category> findAllCategories() {
 
-        List<Category> categories= categoryRepository.findAll();
-        return categories.stream().map(category -> mapper.map(category, CategoryResponseDTO.class)).collect(Collectors.toList());
+         return categoryRepository.findAll();
+       // return categories.stream().map(category -> mapper.map(category, CategoryResponseDTO.class)).collect(Collectors.toList());
     }
 
     public CategoryDTO findCategory(Long id) {

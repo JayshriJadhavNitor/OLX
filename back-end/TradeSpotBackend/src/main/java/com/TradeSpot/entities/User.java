@@ -2,7 +2,6 @@
 package com.TradeSpot.entities;
 
 import jakarta.persistence.*;
-import com.TradeSpot.entities.*;
 
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -40,13 +38,13 @@ public class User extends BaseEntity implements UserDetails {
     private String address;
 
     @Enumerated(EnumType.STRING)
-    private Roles role;
+    private Role role;
 
-    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "buyer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<BroughtItems> broughtItemsList=new ArrayList<>();
 
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
-    List<SellItems> sellItemsList=new ArrayList<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<Product> products = new ArrayList<>();
 
 
 

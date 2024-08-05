@@ -1,9 +1,7 @@
 package com.TradeSpot.configuration;
 
-import com.TradeSpot.entities.Roles;
 import com.TradeSpot.filters.JwtRequestFilter;
 import com.TradeSpot.repositories.UserRepository;
-import com.TradeSpot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.util.AntPathMatcher;
 
 @Configuration
 @EnableWebSecurity

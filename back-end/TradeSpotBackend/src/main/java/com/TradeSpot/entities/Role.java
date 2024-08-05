@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum Roles {
+public enum Role {
 
     USER, ADMIN;
 

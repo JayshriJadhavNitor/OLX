@@ -156,11 +156,7 @@ public class UserController {
         return  ResponseEntity.ok(userservice.findBuyerCount());
     }
 
-    @GetMapping("/getSellerCount")
-    public ResponseEntity<?> getSellerCount(){
 
-        return  ResponseEntity.ok(userservice.findSellerCount());
-    }
 
     @GetMapping("/recentUser")
     public ResponseEntity<?> getRecentUser(){

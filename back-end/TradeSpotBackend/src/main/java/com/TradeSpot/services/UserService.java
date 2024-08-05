@@ -6,11 +6,11 @@ import com.TradeSpot.DTO.UserDTO;
 import com.TradeSpot.DTO.UserRespDTO;
 import com.TradeSpot.DTO.UserUpdateDTO;
 import com.TradeSpot.customException.CustomException;
-import com.TradeSpot.entities.Roles;
+import com.TradeSpot.entities.Product;
+import com.TradeSpot.entities.Role;
 import com.TradeSpot.entities.User;
 
 import com.TradeSpot.repositories.BroughtItemsRepo;
-import com.TradeSpot.repositories.SellItemsRepo;
 import com.TradeSpot.repositories.UserRepository;
 
 
@@ -42,8 +42,7 @@ public class UserService {
     @Autowired
     private BroughtItemsRepo broughtItemsRepo;
 
-    @Autowired
-    private SellItemsRepo sellItemsRepo;
+
 
     public User addUser(UserDTO userDTO) {
 
@@ -54,7 +53,7 @@ public class UserService {
 
         //hash the password
         user.setPassword(encoder.encode(userDTO.getPassword()));
-        user.setRole(Roles.USER);
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
 
@@ -90,10 +89,7 @@ public class UserService {
         return broughtItemsRepo.findBuyerCount();
     }
 
-    public long findSellerCount() {
 
-        return sellItemsRepo.findSellerCount();
-    }
 
     public List<UserRespDTO> getRecentUsers() {
         List<User> users = userRepository.findAll();
@@ -117,5 +113,11 @@ public class UserService {
 
 
 
+    }
+
+    public List<Product> listUserProducts(long id) {
+
+        User user = userRepository.findById(id).orElseThrow();
+        return user.getProducts();
     }
 }

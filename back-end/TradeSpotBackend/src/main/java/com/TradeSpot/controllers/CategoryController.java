@@ -41,8 +41,8 @@ public class CategoryController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CategoryResponseDTO>> getAllCategories(){
-        List<CategoryResponseDTO> categoryDTOS = categoryService.findAllCategories();
+    public ResponseEntity<?> getAllCategories(){
+        List<Category> categoryDTOS = categoryService.findAllCategories();
         if(categoryDTOS!= null){
             return  ResponseEntity.ok( categoryDTOS);
         }
