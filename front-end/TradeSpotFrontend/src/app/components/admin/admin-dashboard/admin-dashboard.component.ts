@@ -29,7 +29,7 @@ export class AdminDashboardComponent {
 
   constructor(
     private userService: UserService,
-    private productService: ProductService
+    private productService: ProductService,
   ) {}
   ngOnInit() {
     this.loadCount();
@@ -41,7 +41,7 @@ export class AdminDashboardComponent {
       this.buyerCount = result;
     });
 
-    this.userService.getBuyerCount().subscribe((result) => {
+    this.productService.getSellerCount().subscribe((result) => {
       this.sellerCount = result;
     });
 

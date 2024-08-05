@@ -6,5 +6,6 @@
        -->
       <h6 class="price">Price: {{product?.price}}</h6>
       <a class="btn btn-primary" (click)="onRemove()">Remove</a>
+      <a routerLink="/updateProductDetails/+{{product.id}}" class="btn btn-primary ">Update</a>
     </div>
   </div>

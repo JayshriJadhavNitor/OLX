@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router'; // Import RouterModule and Routes
 import { AppComponent } from './app.component';
 import { ProductService } from './services/product.service';
-import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { LoginComponent } from './components/registration/login/login.component';
 import { ForgotPasswordComponent } from './components/registration/forgot-password/forgot-password.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
@@ -31,6 +30,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { NewCategoryComponent } from './components/admin/new-category/new-category.component';
@@ -39,6 +39,15 @@ import { CommonModule } from '@angular/common';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { UserListingsComponent } from './components/product/my-listings/user-listings/user-listings.component';
 import { UserProductCardComponent } from './components/product/my-listings/user-listings/user-product-card/user-product-card.component';
+import { UpdateProductDetailsComponent } from './components/product/my-listings/update-product-details/update-product-details.component';
+import { UpdateUserComponent } from './components/registration/update-user/update-user.component';
+import { ForbiddenComponent } from './components/layout/forbidden/forbidden.component';
+import { NavbarComponent } from './components/layout/navbar/navbar/navbar.component';
+import { AuthGuard } from './components/auth/auth.guard';
+import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
+import { ToastrModule } from 'ngx-toastr';
 
 
 // Define your routes here
@@ -73,7 +82,10 @@ const routes: Routes = [
     NewCategoryComponent,
     CategoryListComponent,
     UserListingsComponent,
-    UserProductCardComponent
+    UserProductCardComponent,
+    UpdateProductDetailsComponent,
+    UpdateUserComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,8 +104,25 @@ const routes: Routes = [
     MatToolbarModule,
     MatListModule,
     MatDialogModule,
+    MatMenuModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-top-center',
+      progressBar: true,
+      progressAnimation: 'decreasing',
+    }),
   ],
-  providers: [ProductService],
+  providers: [
+    ProductService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    UserService,
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

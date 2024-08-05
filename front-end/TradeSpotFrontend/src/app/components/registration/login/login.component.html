@@ -1,9 +1,9 @@
-<section class="bg-primary py-3 py-md-5 py-xl-8">
+<section class="bg-primary py-3 py-md-5 py-xl-8 bg-light">
   <br>
-  <div class="container">
+  <div class="container bg-light">
     <div class="row gy-4 align-items-center">
-      <div class="col-12 col-md-6 col-xl-7">
-        <div class="d-flex justify-content-center text-bg-primary">
+      <div class="col-12 col-md-6 col-xl-7 ">
+        <div class="d-flex justify-content-center text-bg-light">
           <div class="col-12 col-xl-9">
             <img class="img-fluid rounded mb-4" loading="lazy" src="../../../assets/logo.png" width="245" height="80"
               alt="OLX Logo">
@@ -50,23 +50,23 @@
                 </div>
                 <div class="col-12">
                   <div class="d-grid">
-                    <button class="btn btn-primary btn-lg" type="submit">Sign in</button>
+                    <button class="btn btn-lg" [disabled]="loginForm.invalid" type="submit">Sign in</button>
                   </div>
                 </div>
-                <p>Don't have an account? <a href="#!" routerLink="/register" class="text-decoration-none">Sign up</a></p>
+                <p>Don't have an account? <a routerLink="/register" class="text-decoration-none text-dark fw-bold">Sign up</a></p>
               </div>
             </form>
             
             <div class="row">
               <div class="col-12">
                 <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end mt-4">
-                  <a href="#!" routerLink="/forgotpassword" class="text-decoration-none">Forgot password</a>
+                  <a routerLink="/forgotpassword" class="text-decoration-none text-dark fw-bold">Forgot password</a>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-12">
-                <p class="mt-5 mb-4">Or sign in with</p>
+                <p class="mt-5 mb-4 text-dark">Or sign in with</p>
                 <div class="d-flex gap-3 flex-column flex-xl-row">
                   <a href="#!" class="btn bsb-btn-xl btn-outline-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

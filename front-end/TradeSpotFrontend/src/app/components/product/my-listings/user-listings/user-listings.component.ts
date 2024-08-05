@@ -45,7 +45,7 @@ export class UserListingsComponent {
 
 
   onRemoveProduct(product: Product): void {
-    if (confirm('Are you sure you want to remove this product?')) {
+    
       this.productService.deleteProduct(product.id).subscribe(
         () => {
           this.products = this.products.filter(p => p.id !== product.id);
@@ -54,7 +54,7 @@ export class UserListingsComponent {
           console.error('Error deleting product:', error);
         }
       );
-    }
+    
   }
 
   ngOnDestroy(): void {

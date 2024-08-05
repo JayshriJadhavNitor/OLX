@@ -6,24 +6,30 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent {
-
-   
-   product: Product | undefined;
+  product: Product | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = Number(params.get('id'));
-      this.productService.findProductById(id).subscribe(product => {
+      this.productService.findProductById(id).subscribe((product) => {
         this.product = product;
       });
     });
+  }
+  displayStyle = 'none';
+
+  openPopup() {
+    this.displayStyle = 'block';
+  }
+  closePopup() {
+    this.displayStyle = 'none';
   }
 }

@@ -234,3 +234,11 @@ a:link{
 .my-listings{
   margin: 10px;
 }
+
+
+
+mat-toolbar {
+  display: flex;
+  justify-content: space-between; 
+  height: 100px;
+}

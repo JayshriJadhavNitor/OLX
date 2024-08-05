@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ProductDTO } from '../models/productDTO';
-import { Product } from '../models/product';
-
+ 
 @Injectable({
   providedIn: 'root',
 })
@@ -38,19 +33,56 @@ export class ProductService {
 
   listAllProducts(): Observable<any> {
     return this.http
-      .get<Product[]>(`${this.baseUrl}`)
+      .get<any>(`${this.baseUrl}`)
       .pipe(catchError(this.handleError));
   }
 
-  getProducts(userId: number): Observable<any[]> {
+  getSellerCount() {
+    return this.http.get<number>(this.baseUrl + '/getSellerCount');
+  }
+
+  getActiveProducts(): Observable<any> {
     return this.http
-      .get<any[]>(`${this.baseUrl}/getproducts/${userId}`)
+      .get<any>(`${this.baseUrl}/activeproducts`)
       .pipe(catchError(this.handleError));
   }
 
-  getProductsByUserId(userId: number): Observable<any[]> {
+  updateProduct(
+    productId: number,
+    productDTO: any,
+    file: File
+  ): Observable<any> {
+    const formData = new FormData();
+    formData.append('productName', productDTO.productName);
+    formData.append('description', productDTO.description);
+    formData.append('price', productDTO.price);
+    formData.append('addedDate', productDTO.addedDate);
+    if (file) {
+      formData.append('file', file);
+    }
+
+    return this.http.put<any>(`${this.baseUrl}/${productId}`, formData, {
+      headers: new HttpHeaders({
+        Accept: 'application/json',
+      }),
+    });
+  }
+
+  // getProducts(userId:number): Observable<any>{
+  //   return this.http.get<any>(`${this.baseUrl}/getproducts/${userId}`).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  getProductsByUserId(userId: number): Observable<any> {
     return this.http
-      .get<any[]>(`${this.baseUrl}/getproductsbyuserId/${userId}`)
+      .get<any>(`${this.baseUrl}/getproductsbyuserId/${userId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getProductsByCategory(categoryName: string): Observable<any> {
+    return this.http
+      .get<any>(`${this.baseUrl}/getproductbycategory/${categoryName}`)
       .pipe(catchError(this.handleError));
   }
 

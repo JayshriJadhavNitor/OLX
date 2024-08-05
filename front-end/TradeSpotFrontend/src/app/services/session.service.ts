@@ -28,7 +28,7 @@ export class SessionService {
   }
   private sessionItems: any = {};
 
-  private sessionItemSubject = new BehaviorSubject<any>({});
+  public sessionItemSubject = new BehaviorSubject<any>({});
   sessionItems$ = this.sessionItemSubject.asObservable();
 
   private isLoggedInSubject = new BehaviorSubject<Boolean>(true);

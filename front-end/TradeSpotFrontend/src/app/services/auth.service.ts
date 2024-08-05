@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
   
   register(signUpRequest: register) {
-    return this.http.post(BASE_URL + "/user/signup", signUpRequest);
+    return this.http.post<register>(BASE_URL + "/user/signup", signUpRequest);
   }
 
   login(loginRequest: login) {
@@ -28,6 +28,11 @@ export class AuthService {
     return this.http.post<user>(BASE_URL + "/user/getByToken", token, {
       headers: this.createAuthorizationHeader()
     });
+  }
+
+  getToken() {
+    const token = sessionStorage.getItem('jwt');
+    return token!=null ? token: "no token found";
   }
 
   createAuthorizationHeader() {

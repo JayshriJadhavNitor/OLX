@@ -13,10 +13,13 @@ import { NewProductComponent } from './components/product/new-product/new-produc
 import { AdminProductComponent } from './components/admin/admin-product/admin-product.component';
 import { NewCategoryComponent } from './components/admin/new-category/new-category.component';
 import { CategoryListComponent } from './components/admin/category-list/category-list.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './components/auth/auth.guard';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
 import { ProductDetailsComponent } from './components/product/product-details/product-details.component';
 import { UserListingsComponent } from './components/product/my-listings/user-listings/user-listings.component';
+import { UpdateProductDetailsComponent } from './components/product/my-listings/update-product-details/update-product-details.component';
+import { UpdateUserComponent } from './components/registration/update-user/update-user.component';
+import { ForbiddenComponent } from './components/layout/forbidden/forbidden.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
@@ -31,6 +34,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdminDashboardComponent,
     canActivate: [AuthGuard],
+    data:{roles:['ADMIN']}
   },
   { path: 'contact', component: ContactComponent },
   { path: 'products', component: ProductsContainerComponent },
@@ -38,21 +42,33 @@ const routes: Routes = [
     path: 'addProduct',
     component: NewProductComponent,
     canActivate: [AuthGuard],
+    data:{roles:['USER']}
   },
   {
     path: 'admin-product',
     component: AdminProductComponent,
     canActivate: [AuthGuard],
+    data:{roles:['ADMIN']}
   },
   {
     path: 'adminCategory',
     component: CategoryListComponent,
     canActivate: [AuthGuard],
+    data:{roles:['ADMIN']}
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
   },
 
   { path: 'userListings', component: UserListingsComponent },
   { path: 'productDetails/:id', component: ProductDetailsComponent },
+  {
+    path: 'updateProductDetails/:id',
+    component: UpdateProductDetailsComponent,
+  },
   { path: '**', component: CategoriesComponent },
+  { path: 'updateUser', component: UpdateUserComponent },
 ];
 
 @NgModule({

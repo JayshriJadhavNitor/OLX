@@ -13,7 +13,22 @@
     </div>
   </section>
 </div>
+<div *ngIf="toggle == false">
 
-<div>
+  <div class="categoryHeading">
+  <h2><strong>Showing Listings For "{{currentCategory}}" Category</strong></h2>
+  </div>
+  <div class="div1">
+<div *ngFor="let prod of products" >
+  <product [product] = "prod"
+  ></product>
+</div>
+</div>
+</div>
+
+
+<div class="productList" *ngIf="toggle == true">
   <products-container></products-container>
 </div>
+
+
