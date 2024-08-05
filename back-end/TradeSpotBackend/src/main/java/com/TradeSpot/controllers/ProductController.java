@@ -3,6 +3,7 @@ package com.TradeSpot.controllers;
 import com.TradeSpot.DTO.CategoryDTO;
 import com.TradeSpot.DTO.ProductDTO;
 import com.TradeSpot.DTO.ProductResponseDTO;
+import com.TradeSpot.DTO.UserDTO;
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.ApiResponse;
 import com.TradeSpot.entities.Product;
@@ -207,6 +208,25 @@ public class ProductController {
 
         long count = productService.getSellerCount();
         return  ResponseEntity.ok().body(count);
+    }
+
+
+    @GetMapping(path="/getSeller/{productId}")
+    public  ResponseEntity<?> getSeller(@PathVariable long productId){
+
+        UserDTO seller = productService.findSeller(productId);
+
+        return ResponseEntity.ok().body(seller);
+    }
+
+
+
+    @GetMapping("/contactSeller/{userId}/{productId}")
+    public ResponseEntity<?> notifySeller(@PathVariable Long userId, @PathVariable Long productId ){
+
+        String msg = productService.sendNotification(userId, productId);
+
+        return  ResponseEntity.ok().body(msg);
     }
 
 

@@ -1,8 +1,6 @@
 package com.TradeSpot.services;
 
-import com.TradeSpot.DTO.CategoryDTO;
-import com.TradeSpot.DTO.ProductDTO;
-import com.TradeSpot.DTO.ProductResponseDTO;
+import com.TradeSpot.DTO.*;
 import com.TradeSpot.customException.CustomException;
 import com.TradeSpot.entities.Category;
 import com.TradeSpot.entities.Product;
@@ -12,6 +10,9 @@ import com.TradeSpot.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,6 +42,9 @@ public class ProductService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
 
 
@@ -178,5 +182,72 @@ public class ProductService {
     public long getSellerCount() {
 
         return productRepository.getSellerCount();
+    }
+
+    @Transactional
+    public UserDTO findSeller(long productId) {
+
+        Product product = productRepository.findById(productId).orElseThrow();
+        return mapper.map(product.getUser(), UserDTO.class);
+    }
+
+
+    @Transactional
+    public String sendNotification(Long userId, long productId) {
+
+
+
+
+        try {
+
+
+            Product product = productRepository.findById(productId).orElseThrow();
+            UserDTO user = userService.findUser(userId);
+            UserUpdateDTO userUpdateDTO = mapper.map(user, UserUpdateDTO.class);
+
+            String str = buildEmailBody(product.getUser().getFirstName()+" "+product.getUser().getLastName(),product.getProductName(),product.getDescription(),
+                    user.getFirstName()+" "+ user.getLastName(),user.getEmail(),user.getAddress());
+            SimpleMailMessage message = new SimpleMailMessage();
+            System.out.println(product.getUser().getEmail());
+            message.setTo(product.getUser().getEmail());
+            message.setSubject("buyer notification");
+            System.out.println(userUpdateDTO.toString());
+            message.setText(str);
+            javaMailSender.send(message);
+            return "mail sent successfully";
+
+        }catch (MailException e){
+            e.printStackTrace();
+        }
+        //return "mail sent successfully";
+        return "mail sent successfully";
+    }
+
+    public static String buildEmailBody(String sellerName, String productName,  String productDescription, String buyerName, String buyerEmail, String buyerLocation) {
+        return String.format(
+                "Dear %s,%n%n" +
+                        "I hope this message finds you well.%n%n" +
+                        "We are excited to inform you that a buyer has shown interest in your product. Below are the details of the buyer and the product they are interested in:%n%n" +
+                        "Product Information:%n" +
+                        "- Product Name: %s%n" +
+
+                        "- Description: %s%n%n" +
+                        "Buyer Information:%n" +
+                        "- Name: %s%n" +
+                        "- Email: %s%n" +
+                        "- Location: %s%n%n" +
+                        "We encourage you to review these details and reach out to the buyer to discuss further steps. If you have any questions or need assistance, please do not hesitate to contact us.%n%n" +
+                        "Thank you for your attention, and best of luck with your sale!%n%n" +
+                        "Warm regards,%n" +
+                        "OLX",
+
+                sellerName,
+                productName,
+
+                productDescription,
+                buyerName,
+                buyerEmail,
+                buyerLocation
+        );
     }
 }
